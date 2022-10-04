@@ -7,8 +7,6 @@ export const App = () => {
 
   return (
     <>
-        <h1>Contacts Directory</h1>
-        <hr />
         <div className="main-container">
             <div className="contacts-container">
                 <Contacts contacts={contact} onDeleteContact={onDeleteContact} />

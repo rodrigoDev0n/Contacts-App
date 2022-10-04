@@ -20,13 +20,15 @@ export const useContacts = () => {
             type: '[CONTACT] Add Contact',
             payload: contact,
         })
+        console.log({contact});
     }
 
     const onDeleteContact = (email) => {
         dispatch({
             type: '[CONTACT] Delete Contact',
-            payload: email
+            payload: email,
         })
+        console.log('hola');
     }
 
 

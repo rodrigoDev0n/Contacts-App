@@ -1,4 +1,4 @@
-<h1 align="center">Contacts-App</h1>
+<h1 align="center">Contacts-App 📝</h1>
 
 ----
 

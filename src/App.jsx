@@ -1,5 +1,6 @@
 import { AddFormContacts, Contacts } from "./components/components";
 import { useContacts } from "./hooks/useContacts";
+import { NoContacts } from "./components/components";
 
 export const App = () => {
 
@@ -9,7 +10,11 @@ export const App = () => {
     <>
         <div className="main-container">
             <div className="contacts-container">
-                <Contacts contacts={contact} onDeleteContact={onDeleteContact} />
+                {
+                  contact.length === 0
+                  ? <NoContacts />
+                  : <Contacts contacts={contact} onDeleteContact={onDeleteContact} />
+                }
             </div>
             <div className="add-contacts-form">
                 <AddFormContacts onNewContact={handleNewContact} />

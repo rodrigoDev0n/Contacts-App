@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { colors } from "../helpers/colors";
 import { useForm } from "../hooks/useForm";
+import { backgrounds } from "../helpers/backgrounds";
 
 export const AddFormContacts = ({ onNewContact }) => {
 
@@ -8,9 +9,11 @@ export const AddFormContacts = ({ onNewContact }) => {
          name, 
          email, 
          phone,
+         customb,
          nameInput,
          emailInput,
          phoneInput,
+         customBackground,
          resetForm, 
     } = useForm()
 
@@ -18,9 +21,15 @@ export const AddFormContacts = ({ onNewContact }) => {
     const emailRef = useRef()
     const numberRef = useRef()
     const selectedColor = useRef()
+    const custom = useRef()
     let background = colors[0]
+    let backgroundImage = custom
 
     const onSubmitForm = (event) => {
+        if (custom.current.value.length > 1) {
+            backgroundImage = custom.current.value
+        }
+        console.log(backgroundImage);
         event.preventDefault()
         console.log('Enviando datos');
         const contact = {
@@ -28,6 +37,7 @@ export const AddFormContacts = ({ onNewContact }) => {
             email: emailRef.current.value,
             phone: numberRef.current.value,
             color: background,
+            image: backgroundImage,
         }
         onNewContact(contact)
         resetForm()
@@ -36,6 +46,11 @@ export const AddFormContacts = ({ onNewContact }) => {
     const handleSelectColor = (color) => {
         background = color
         console.log(background);
+    }
+
+    const handleSelectBackground = (backimage) => {
+        backgroundImage = backimage
+        console.log(backgroundImage);
     }
 
     return (
@@ -89,6 +104,25 @@ export const AddFormContacts = ({ onNewContact }) => {
                                 >{c}</span>
                             ))
                         }
+                    </div>
+                    <div className="backgrounds-selection-container">
+                        {
+                            backgrounds.map(b => (
+                                <div key={b} onClick={() => handleSelectBackground(b)}>
+                                    <img className="backgrounds-imgs" src={b} alt="" />
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <div className="form_input-container">
+                        <input 
+                            onChange={customBackground}
+                            value={customb}
+                            ref={custom} 
+                            type="text" 
+                            name="" 
+                            placeholder="Añade un custom background" 
+                        />
                     </div>
                     <button className="add-button" type="submit">Añadir</button>
                 </form>
